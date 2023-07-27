@@ -1,0 +1,24 @@
+extends layout 
+block content 
+  .flex
+    h3 Sign a card
+    form#signform(action="/sign" method="post" enctype="multipart/form-data").card
+      #imageholder
+        #preview
+          img(src="")#imgPreview
+        //- #preview
+        label#gLabel Giphy
+        label#fuLabel(for="image") Upload Image
+        p#clearImage.hidden
+      .padding
+        input#image(type="file", name="image").hidden
+        input#giphyurl(type="hidden" name="giphyurl" value="")
+        textarea(placeholder="Enter your message here" name="comment")#comment
+        p -#{user.display_name}
+        button Sign
+
+    #giphy
+      #modal.card
+        h4 Giphy
+        input(type="text")#gquery
+        #gimages search for a term above

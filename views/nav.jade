@@ -1,0 +1,13 @@
+nav 
+  ul
+    li 
+      a(href="/") home
+    if !user
+      li 
+        a(href="/login") login
+    if user 
+      li 
+        a(href="/sign" class= (path==='/sign') ? 'selected' :'') sign
+      li 
+        a(href="/logout") logout
+  //- p= JSON.stringify(user)

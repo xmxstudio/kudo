@@ -1,0 +1,12 @@
+extends layout 
+block header 
+  meta(http-equiv="refresh" content="3; url=/##{x.timestamp}")
+block content 
+  .flex
+    h3 Thanks for signing! Here's your card!!!!!
+    .card
+      #imageholder
+        img(src='#{x.image}')#preview
+      .padding
+        #comment=x.comment
+        #signedname - #{x.name}

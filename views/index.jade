@@ -1,0 +1,32 @@
+mixin card(data)
+  .card.x
+    #imageholder
+      img(src='#{data.image}')#preview
+    .padding
+      #comment=data.comment
+      #signedname - #{data.name}
+      a(name="#{data.timestamp}")
+extends layout
+
+block content
+  if cards.length == 0
+    p Be the first to leave a message!
+  else 
+    -var c1 = cards.filter((_, index) => index % 4 === 0)
+    -var c2 = cards.filter((_, index) => index % 4 === 1)
+    -var c3 = cards.filter((_, index) => index % 4 === 2)
+    -var c4 = cards.filter((_, index) => index % 4 === 3)
+    
+    #cardview
+      div
+        each c in c1
+          +card(JSON.parse(c))
+      div
+        each c in c2
+          +card(JSON.parse(c))
+      div
+        each c in c3
+          +card(JSON.parse(c))
+      div
+        each c in c4
+          +card(JSON.parse(c))

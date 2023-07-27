@@ -1,0 +1,7 @@
+mixin thumb(g)
+  img(src='#{g.images.original.url}').gthumb
+
+  //- .gthumb(style="background: url(#{g.images.original.url})")
+
+each g in giphy
+  +thumb(g)

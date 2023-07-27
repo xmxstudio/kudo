@@ -1,0 +1,271 @@
+$cardWidth: 400px
+$cardMargin: 15px
+$cardHoverScale: 1.2
+
+*
+	padding: 0
+	margin: 0
+	box-sizing: border-box
+body,html
+	height: 100vh
+	font-family: 'Lato', sans-serif
+	display: flex
+	justify-content: center
+	align-items: center
+	background: linear-gradient(#555, #8fbcca)
+		attachment: fixed
+
+.card
+	display: flex
+	flex-direction: column
+	border-radius: 12px
+	background-color: #fff
+	width: $cardWidth
+	overflow: hidden 
+	border: solid 1px #444
+	margin: $cardMargin
+	transform: scale(1)
+	transition: all 0.3s
+	// position: relative
+.x
+	&:hover
+		margin: $cardMargin
+		transform: scale($cardHoverScale) 
+		z-index: 10
+		box-shadow:  0  3px 25px #000
+		// box-shadow:  0  3px 25px  #00000065
+.delete
+	border: solid 1px red
+	position: relative
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	z-index: 10
+
+input,textarea,button
+	user-select: none
+	outline: none
+	border: none
+	border-radius: 3px
+	resize: none
+	padding: 5px
+	color: #444
+	margin:  3px 0
+input,textarea
+	background-color: #eee
+.hidden
+	display: none
+#preview 
+	background-size: contain !important
+	background-repeat: no-repeat
+	min-height: 140px
+	width: 100%
+	background: #eee
+	border-bottom: solid 1px #ccc
+	
+	// border: none
+.padding
+	padding: 20px
+	display: flex
+	flex-direction: column
+#imageholder
+	position: relative
+	width: 400px
+	
+	
+		
+	#clearImage
+		position: absolute
+		left: 0
+		right: 0
+		top: 0
+		bottom: 0
+		transition: all 0.63s
+		cursor: pointer  
+		padding-top: 0%
+		// opacity: 0
+		&:before
+			content: 'Clear'
+			display: block
+			position: absolute
+			height: 20px
+			left: 40%
+			right: 40%
+			color: #000
+			background-color: #ff7b00
+			border-radius: 3px
+			padding: 5px 
+			text-align: center
+			transition: all 0.6s
+			user-select: none
+			opacity: 0
+		&:hover
+				padding-top: 35%
+				&:before
+					opacity: 1
+			
+	
+	#fuLabel
+		position: absolute
+		left: 0%
+		right: 50%
+		bottom: 0
+		top: 0
+		display: flex
+		justify-content: center
+		align-items: center
+		cursor: pointer
+		transition: all 0.3
+		&:hover
+			color: #ff7b00
+		
+	#gLabel
+		position: absolute
+		left: 50%
+		right: 0
+		bottom: 0
+		top: 0
+		display: flex
+		justify-content: center
+		align-items: center
+		cursor: pointer
+		&:hover
+			color: #ff7b00
+#signedname
+	margin: 5px 0
+	font-style: italic
+nav
+	position: fixed
+	z-index: 1222
+	top: 0
+	display: flex
+	justify-content: center
+	align-items: center
+	background-color: #444
+	border-bottom-left-radius: 10px
+	border-bottom-right-radius: 10px
+	overflow: hidden
+	// padding: 10px
+	ul
+		li
+			list-style-type: none
+			display: inline-block
+			padding: 5px 0
+			transition: all 0.3s
+			a
+				text-decoration: none
+				color: #fff
+				padding: 5px
+			// &:nth-child(2)
+			//     border-left: solid 1px #666
+			//     border-right: solid 1px #666
+			&:hover
+				background-color :#ff7b00
+				
+
+
+h3
+	color: #ccc
+
+#cardview
+	
+	position: absolute
+	top: 30px
+	padding: 20px
+	left: 0
+	right: 0
+	bottom: 0
+	display: flex
+	flex-wrap: wrap
+	justify-content: center
+	>div
+		// border: solid 2px blue
+		display: flex
+		flex-direction: column
+		align-items: center
+
+#giphy
+	position: absolute
+	left: 0
+	right: 0
+	bottom: 0
+	top: 0
+	background-color: #0000009c
+	display: flex
+	justify-content: center
+	align-items: center
+	transition: all 0.3s
+	opacity: 0
+	pointer-events: none
+	#modal
+		height: 80vh
+		width: 50%
+		padding: 20px
+		#gimages
+			height: 100%
+			display: flex
+			flex-wrap: wrap
+			align-items: center
+			justify-content: center
+			overflow-y: auto
+			overflow-x: hidden
+			img
+				border-radius: 7px
+				margin: 5px
+				width: 100%
+				height: auto
+#imgPreview
+	width: 100%
+.gthumb
+	// height: 150px
+
+#content
+	margin-top: 50px
+	
+
+
+::-webkit-scrollbar
+	width: 10px
+::-webkit-scrollbar-track 
+	background: linear-gradient(#555, #8fbcca)
+::-webkit-scrollbar-thumb
+	background: #b6b6b6
+	border-radius: 5px
+::-webkit-scrollbar-thumb:hover
+	background: #555
+
+
+#nav
+	position: absolute
+	top: 0
+	left: 0
+	a
+		text-decoration: none
+		color: #fff
+		margin: 0 3px
+
+
+
+.flashbg
+	animation: bgFlash 1s forwards
+@keyframes bgFlash
+	0%
+		background-color: #ad7e7e
+	100%
+		background-color: #eee
+.selected
+	border-bottom: 3px orange !important
+
+
+// #cardview 
+//   position: absolute
+//   top: 30px
+//   padding: 20px
+//   left: 0
+//   right: 0
+//   bottom: 0
+//   display: flex
+//   flex-wrap: wrap
+//   justify-content: flex-end
+//   flex-direction: column-reverse
