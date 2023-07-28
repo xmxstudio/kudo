@@ -77,7 +77,8 @@ router.post('/sign',ensureAuthenticated, upload.single('image'),(req,res)=>{
   }
   let name =req.user.display_name;// req.body.name  || 'unknown';
   let comment = req.body.comment;
-  let x ={ name,comment,image,timestamp: new Date().getTime()};
+  let to = req.body.to;
+  let x ={ to, name,comment,image,timestamp: new Date().getTime()};
   fs.writeFile(`public/cards/${new Date().getTime()}.json`, JSON.stringify(x), (err) => {
     if (err) {
       console.error(err);
@@ -95,8 +96,59 @@ router.get('/auth/cb',passport.authenticate('twitchtv', { failureRedirect: '/' }
   }
 );
 
+router.get('/cards',ensureAuthenticated, async(req,res)=>{
+  
+  try {
 
-router.get('/nimda',(req,res)=>{
-  res.render('admin');
+    const cards = fs.readdirSync('public/cards', { withFileTypes: true });
+    const files = cards.filter(card => card.isFile()).map(card => card.name);
+    let cardContents = await Promise.all(files.map(card => fs.promises.readFile(`public/cards/${card}`, 'utf8')));
+    console.log(cardContents[0]);
+    cardContents = cardContents.filter(card=>JSON.parse(card).name === req.user.display_name);
+    console.log(cardContents.length);
+    res.render('cards', { cards:  cardContents });
+  } catch (error) {
+    console.error(error);
+    res.render("error");
+    // res.status(500).send('Internal Server Error');
+  }
+  
+})
+
+router.get('/nimda',ensureAuthenticated, async (req,res)=>{
+  try {
+    const cards = fs.readdirSync('public/cards', { withFileTypes: true });
+    const files = cards.filter(card => card.isFile()).map(card => card.name);
+    let cardContents = await Promise.all(files.map(card => fs.promises.readFile(`public/cards/${card}`, 'utf8')));
+    res.render('admin', { cards:  cardContents });
+  } catch (error) {
+    console.error(error);
+    res.render("error");
+    // res.status(500).send('Internal Server Error');
+  }
+})
+
+router.post('/nimda',ensureAuthenticated, (req,res)=>{
+  const card = +(req.body.card);
+  console.log(card);
+  if (typeof card !== 'number') {
+    console.log("invalid input");
+    return res.status(400).send("Invalid input");
+  }
+  const filePath = path.join(__dirname, '../public/cards', `${card}.json`);
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(404).send("File not found");
+    }
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting file:", err);
+        return res.status(500).send("Error deleting file");
+      }
+      console.log(`File ${card}.json deleted successfully`);
+      res.send("File deleted successfully");
+    });
+  });
 })
 module.exports = router;

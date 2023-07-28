@@ -1,0 +1,50 @@
+<style>
+  .deleted{
+    display: block;
+    opacity: 1;
+    animation: del 0.3s forwards;
+  }
+
+  @keyframes del {
+    0%{
+      opacity: 1;
+    }
+    99%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+      display: none;
+    }
+  }
+</style>
+<script>
+
+document.addEventListener('click',e=>{
+  if (e.target.classList.contains('delete') || e.target.closest('.delete')) { 
+    
+      let id = e.target.getAttribute('data-card');
+      
+      const data = { card: id };
+      const options = {
+        method:   'POST',
+        headers: {'Content-Type': 'application/json'},
+        body:     JSON.stringify(data)
+      };
+      fetch('/nimda', options)
+        .then(response => {
+          if (!response.ok) {throw new Error('Network response was not ok');}
+          e.target.parentNode.classList.add('deleted')
+        })
+        .catch(error => {
+          alert('An error occurred while deleting the item.');
+          console.error('Error:', error);
+        });
+
+    }
+})
+
+
+
+
+</script>

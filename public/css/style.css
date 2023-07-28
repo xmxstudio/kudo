@@ -22,22 +22,46 @@ body, html {
   border: solid 1px #444;
   margin: 15px;
   transform: scale(1);
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  box-shadow: 0 0 23px  transparent; }
 
 .x:hover {
   margin: 15px;
-  transform: scale(1.2);
+  transform: scale(1.05);
   z-index: 10;
-  box-shadow: 0  3px 25px #000; }
+  box-shadow: 0 0 23px  #000; }
 
 .delete {
-  border: solid 1px red;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10; }
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s; }
+  .delete:before {
+    content: 'Delete';
+    display: block;
+    position: absolute;
+    height: 20px;
+    left: 40%;
+    right: 40%;
+    color: #000;
+    background-color: #ff7b00;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    transition: all 0.6s;
+    user-select: none;
+    opacity: 0;
+    cursor: pointer; }
+  .delete:hover {
+    padding-top: 35%; }
+    .delete:hover:before {
+      opacity: 1; }
 
 input, textarea, button {
   user-select: none;
@@ -132,13 +156,13 @@ input, textarea {
 nav {
   position: fixed;
   z-index: 1222;
-  top: 0;
+  top: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #444;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border: solid 1px #111;
+  border-radius: 5px;
   overflow: hidden; }
   nav ul li {
     list-style-type: none;
@@ -239,6 +263,11 @@ h3 {
     background-color: #eee; } }
 
 .selected {
-  border-bottom: 3px orange !important; }
+  background-color: #ff7b0056; }
+
+#to {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1.5rem; }
 
 /*# sourceMappingURL=style.css.map */

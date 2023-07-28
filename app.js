@@ -38,7 +38,7 @@ passport.use(
   'twitch',
   new OAuth2Strategy(
     {
-      authorizationURL: 'https://id.twitch.tv/oauth2/authorize',
+      authorizationURL: 'https://id.twitch.tv/oauth2/authorize?force_verify=true',
       tokenURL: 'https://id.twitch.tv/oauth2/token',
       clientID: twitchClientId,
       clientSecret: twitchClientSecret,
@@ -107,6 +107,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.locals.requestedURI = req.originalUrl;
   res.locals.path = req.path;
+  res.locals.owner = 'timeenjoyed';
   next();
 });
 

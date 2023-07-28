@@ -3,6 +3,8 @@ mixin card(data)
     #imageholder
       img(src='#{data.image}')#preview
     .padding
+      if data.to
+        #to #{data.to}
       #comment=data.comment
       #signedname - #{data.name}
       a(name="#{data.timestamp}")

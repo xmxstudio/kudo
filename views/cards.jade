@@ -1,0 +1,16 @@
+mixin card(data)
+  .card
+    .delete
+    #imageholder
+      img(src='#{data.image}')#preview
+    .padding
+      #comment=data.comment
+      #signedname - #{data.name}
+      a(name="#{data.timestamp}")
+
+extends layout
+block content 
+  #cardview
+    div 
+      each card in cards 
+        +card(JSON.parse(card))

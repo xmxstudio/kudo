@@ -1,3 +1,40 @@
-extends layout 
+mixin card(data)
+  .card
+    .delete(data-card='#{data.timestamp}')
+    #imageholder
+      img(src='#{data.image}')#preview
+    .padding
+      #comment=data.comment
+      #signedname - #{data.name}
+      a(name="#{data.timestamp}")
+
+extends layout
 block content 
-  h3 Admin
+  if cards.length == 0
+    p No cards to display!
+  else 
+    -var c1 = cards.filter((_, index) => index % 4 === 0)
+    -var c2 = cards.filter((_, index) => index % 4 === 1)
+    -var c3 = cards.filter((_, index) => index % 4 === 2)
+    -var c4 = cards.filter((_, index) => index % 4 === 3)
+    
+    #cardview
+      div
+        each c in c1
+          +card(JSON.parse(c))
+      div
+        each c in c2
+          +card(JSON.parse(c))
+      div
+        each c in c3
+          +card(JSON.parse(c))
+      div
+        each c in c4
+          +card(JSON.parse(c))
+
+  //- #cardview
+  //-   div 
+  //-     each card in cards 
+  //-       +card(JSON.parse(card))
+
+  include admin.html

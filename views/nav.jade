@@ -1,13 +1,15 @@
 nav 
   ul
     li 
-      a(href="/") home
+      a(href="/" class= (path==='/') ? 'selected' :'') home
     if !user
       li 
         a(href="/login") login
-    if user 
+    if user && user.display_name===owner
       li 
-        a(href="/sign" class= (path==='/sign') ? 'selected' :'') sign
-      li 
-        a(href="/logout") logout
+        a(href="/nimda" class= (path==='/nimda') ? 'selected' :'') manage
+    li 
+      a(href="/sign" class= (path==='/sign') ? 'selected' :'') sign
+    li 
+      a(href="/logout") logout
   //- p= JSON.stringify(user)

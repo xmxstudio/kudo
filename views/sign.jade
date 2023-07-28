@@ -13,6 +13,7 @@ block content
       .padding
         input#image(type="file", name="image").hidden
         input#giphyurl(type="hidden" name="giphyurl" value="")
+        input(type="text" name="to" placeholder="To: (Optional)")
         textarea(placeholder="Enter your message here" name="comment")#comment
         p -#{user.display_name}
         button Sign
