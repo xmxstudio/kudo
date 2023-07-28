@@ -31,12 +31,12 @@ app.use(
 /*****************************************************************************************************/
 // twitch auth stuff
 //variables can be changed here ;)
-const callbackurl = 'https://credits.timeenjoyed.dev';
-const owner= 'timeenjoyed';
+
+const owner= 'TimeEnjoyed';
 const sslPath = '/etc/letsencrypt/live/credits.timeenjoyed.dev/';
 const twitchClientId = 'y74yeci228ipaxqbju278arb8kdpn8';
 const twitchClientSecret = 'b2gzfzyl7a611y4cs8bxnhfpgmddeu';
-const twitchCallbackUrl = `https://${callbackurl}/auth/cb`;
+const twitchCallbackUrl = `https://credits.timeenjoyed.dev/auth/cb`;
 
 passport.use(
   'twitch',
