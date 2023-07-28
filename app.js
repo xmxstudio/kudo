@@ -30,9 +30,13 @@ app.use(
 
 /*****************************************************************************************************/
 // twitch auth stuff
+//variables can be changed here ;)
+const callbackurl = 'https://credits.timeenjoyed.dev';
+const owner= 'timeenjoyed';
+const sslPath = '/etc/letsencrypt/live/credits.timeenjoyed.dev/';
 const twitchClientId = 'y74yeci228ipaxqbju278arb8kdpn8';
 const twitchClientSecret = 'b2gzfzyl7a611y4cs8bxnhfpgmddeu';
-const twitchCallbackUrl = 'https://localhost/auth/cb';
+const twitchCallbackUrl = `https://${callbackurl}/auth/cb`;
 
 passport.use(
   'twitch',
@@ -107,7 +111,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.locals.requestedURI = req.originalUrl;
   res.locals.path = req.path;
-  res.locals.owner = 'timeenjoyed';
+  res.locals.owner = owner;
   next();
 });
 
@@ -140,11 +144,11 @@ module.exports = app;
 
 const port = 443;
 const https = require('https');
-// const sslPath = '/etc/letsencrypt/live/credits.timeenjoyed.dev/';
-const sslPath = '';
+
+//const sslPath = '';
 const options = {
-  key: fs.readFileSync(path.join(sslPath, 'private-key.pem')),
-  cert: fs.readFileSync(path.join(sslPath, 'certificate.pem'))
+  key: fs.readFileSync(path.join(sslPath, 'privkey.pem')),
+  cert: fs.readFileSync(path.join(sslPath, 'fullchain.pem'))
 };
 https.createServer(options, app).listen(443,()=>{
   console.log('server is running on port 443')
